@@ -1,0 +1,7 @@
+services:
+  cyber-homepage:
+    build: .
+    container_name: cyber-homepage
+    ports:
+      - "8080:3000"
+    restart: unless-stopped

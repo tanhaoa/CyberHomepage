@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Cyber Homepage - Sci-fi themed personal dashboard" />
+  <meta name="theme-color" content="#06060f" />
+  <title>Cyber Homepage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Canvas Particle Background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Grid Pulse Overlay -->
+  <div class="grid-pulse"></div>
+
+  <!-- Top Bar -->
+  <header class="top-bar" id="topBar">
+    <div class="top-bar-left">
+      <span class="status-dot online"></span>
+      <span class="terminal-text" id="ipInfo">LOCATING...</span>
+    </div>
+    <div class="top-bar-center">
+      <span class="terminal-text">SYSTEM ONLINE</span>
+    </div>
+    <div class="top-bar-right">
+      <span class="terminal-text" id="weatherInfo">LOADING...</span>
+      <button class="focus-toggle" id="focusToggle" title="专注模式" aria-label="切换专注模式">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <!-- Clock Section -->
+    <section class="clock-section">
+      <div class="greeting" id="greeting"></div>
+      <div class="clock-wrapper">
+        <div class="clock" id="clock">00:00:00</div>
+        <div class="clock-glow"></div>
+      </div>
+      <div class="date-display" id="dateDisplay"></div>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="search-section">
+      <div class="search-container">
+        <div class="search-engine-tabs">
+          <button class="engine-tab active" data-engine="google">Google</button>
+          <button class="engine-tab" data-engine="bing">Bing</button>
+          <button class="engine-tab" data-engine="baidu">百度</button>
+          <button class="engine-tab" data-engine="duckduckgo">DuckDuckGo</button>
+        </div>
+        <div class="search-bar">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" placeholder="Search the cosmos..." autocomplete="off" />
+          <kbd class="search-hint">/</kbd>
+        </div>
+      </div>
+    </section>
+
+    <!-- Card Grid -->
+    <section class="card-grid">
+      <!-- Quick Links -->
+      <div class="glass-card quick-links-card">
+        <div class="card-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span>QUICK ACCESS</span>
+        </div>
+        <div class="links-grid" id="linksGrid">
+          <a href="https://github.com" target="_blank" rel="noopener" class="link-item" data-color="#f97316">
+            <div class="link-icon">⌥</div>
+            <span>GitHub</span>
+          </a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" class="link-item" data-color="#ef4444">
+            <div class="link-icon">▶</div>
+            <span>YouTube</span>
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener" class="link-item" data-color="#3b82f6">
+            <div class="link-icon">✦</div>
+            <span>Twitter</span>
+          </a>
+          <a href="https://chat.openai.com" target="_blank" rel="noopener" class="link-item" data-color="#10b981">
+            <div class="link-icon">◈</div>
+            <span>ChatGPT</span>
+          </a>
+          <a href="https://stackoverflow.com" target="_blank" rel="noopener" class="link-item" data-color="#f59e0b">
+            <div class="link-icon">⧫</div>
+            <span>StackOverflow</span>
+          </a>
+          <a href="https://reddit.com" target="_blank" rel="noopener" class="link-item" data-color="#ff6b35">
+            <div class="link-icon">◉</div>
+            <span>Reddit</span>
+          </a>
+          <a href="https://notion.so" target="_blank" rel="noopener" class="link-item" data-color="#a855f7">
+            <div class="link-icon">▢</div>
+            <span>Notion</span>
+          </a>
+          <a href="https://spotify.com" target="_blank" rel="noopener" class="link-item" data-color="#22c55e">
+            <div class="link-icon">♫</div>
+            <span>Spotify</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- System Info Terminal -->
+      <div class="glass-card terminal-card">
+        <div class="card-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          <span>SYSTEM TERMINAL</span>
+          <span class="terminal-blink">_</span>
+        </div>
+        <div class="terminal-body" id="terminalBody">
+          <div class="terminal-line"><span class="t-green">$</span> system_scan --init</div>
+          <div class="terminal-line t-dim">> Initializing...</div>
+          <div class="terminal-line"><span class="t-green">$</span> fetch_system_info</div>
+          <div class="terminal-line t-dim">> Platform: <span id="sysPlatform">--</span></div>
+          <div class="terminal-line t-dim">> Screen: <span id="sysScreen">--</span></div>
+          <div class="terminal-line t-dim">> Language: <span id="sysLang">--</span></div>
+          <div class="terminal-line t-dim">> Memory: <span id="sysMemory">--</span></div>
+          <div class="terminal-line t-dim">> Cores: <span id="sysCores">--</span></div>
+          <div class="terminal-line t-dim">> Network: <span id="sysNetwork">--</span></div>
+          <div class="terminal-line"><span class="t-green">$</span> status_report</div>
+          <div class="terminal-line t-cyan">> ALL SYSTEMS NOMINAL</div>
+          <div class="terminal-line"><span class="t-green">$</span> <span class="terminal-cursor">█</span></div>
+        </div>
+      </div>
+
+      <!-- Daily Quote -->
+      <div class="glass-card quote-card">
+        <div class="card-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3z"/></svg>
+          <span>DAILY TRANSMISSION</span>
+        </div>
+        <div class="quote-body">
+          <blockquote class="quote-text" id="quoteText"></blockquote>
+          <div class="quote-author" id="quoteAuthor"></div>
+        </div>
+      </div>
+
+      <!-- Quick Notes -->
+      <div class="glass-card notes-card">
+        <div class="card-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>QUICK NOTES</span>
+          <span class="note-count" id="noteCount">0</span>
+        </div>
+        <div class="notes-body">
+          <textarea id="noteInput" placeholder="Record your transmission..." rows="3"></textarea>
+          <button class="note-save-btn" id="noteSaveBtn">SAVE</button>
+          <div class="notes-list" id="notesList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Focus Mode Overlay (pure clock + particles) -->
+  <div class="focus-overlay" id="focusOverlay">
+    <div class="focus-clock" id="focusClock">00:00</div>
+    <div class="focus-date" id="focusDate"></div>
+    <div class="focus-hint">Press <kbd>Esc</kbd> to exit</div>
+  </div>
+
+  <!-- Bottom Data Stream -->
+  <footer class="data-stream" id="dataStream">
+    <div class="stream-content" id="streamContent"></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
