@@ -29,7 +29,10 @@
     </div>
     <div class="top-bar-right">
       <span class="terminal-text" id="weatherInfo">LOADING...</span>
-      <button class="focus-toggle" id="focusToggle" title="专注模式" aria-label="切换专注模式">
+      <button class="top-btn" id="settingsToggle" title="设置" aria-label="打开设置">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+      <button class="top-btn focus-toggle" id="focusToggle" title="专注模式" aria-label="切换专注模式">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
       </button>
     </div>
@@ -164,6 +167,125 @@
     <div class="focus-clock" id="focusClock">00:00</div>
     <div class="focus-date" id="focusDate"></div>
     <div class="focus-hint">Press <kbd>Esc</kbd> to exit</div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="settings-backdrop" id="settingsBackdrop">
+    <div class="settings-modal" id="settingsModal">
+      <div class="settings-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>SYSTEM SETTINGS</span>
+        <button class="settings-close" id="settingsClose">&times;</button>
+      </div>
+
+      <div class="settings-body">
+        <!-- 主题色 -->
+        <div class="setting-group">
+          <label class="setting-label">主题色 / ACCENT COLOR</label>
+          <div class="setting-row">
+            <div class="color-presets" id="accentPresets">
+              <button class="color-preset active" data-color="#00e5ff" style="background:#00e5ff" title="青色"></button>
+              <button class="color-preset" data-color="#a855f7" style="background:#a855f7" title="紫色"></button>
+              <button class="color-preset" data-color="#f97316" style="background:#f97316" title="橙色"></button>
+              <button class="color-preset" data-color="#10b981" style="background:#10b981" title="绿色"></button>
+              <button class="color-preset" data-color="#f43f5e" style="background:#f43f5e" title="玫红"></button>
+              <button class="color-preset" data-color="#eab308" style="background:#eab308" title="金色"></button>
+            </div>
+            <input type="color" class="color-picker" id="accentPicker" value="#00e5ff" title="自定义颜色" />
+          </div>
+        </div>
+
+        <!-- 粒子颜色 -->
+        <div class="setting-group">
+          <label class="setting-label">粒子颜色 / PARTICLE COLOR</label>
+          <div class="setting-row">
+            <div class="color-presets" id="particlePresets">
+              <button class="color-preset active" data-color="0,229,255" style="background:#00e5ff" title="青色"></button>
+              <button class="color-preset" data-color="139,92,246" style="background:#8b5cf6" title="紫色"></button>
+              <button class="color-preset" data-color="16,185,129" style="background:#10b981" title="绿色"></button>
+              <button class="color-preset" data-color="249,115,22" style="background:#f97316" title="橙色"></button>
+              <button class="color-preset" data-color="255,255,255" style="background:#ffffff" title="白色"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 时钟格式 -->
+        <div class="setting-group">
+          <label class="setting-label">时钟格式 / CLOCK FORMAT</label>
+          <div class="setting-row">
+            <button class="toggle-group" id="clockFormatToggle">
+              <span class="toggle-option active" data-value="24">24H</span>
+              <span class="toggle-option" data-value="12">12H</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 默认搜索引擎 -->
+        <div class="setting-group">
+          <label class="setting-label">默认搜索引擎 / DEFAULT ENGINE</label>
+          <div class="setting-row">
+            <select class="setting-select" id="defaultEngine">
+              <option value="google">Google</option>
+              <option value="bing">Bing</option>
+              <option value="baidu">百度</option>
+              <option value="duckduckgo">DuckDuckGo</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 问候语 -->
+        <div class="setting-group">
+          <label class="setting-label">自定义问候语 / CUSTOM GREETING</label>
+          <div class="setting-row">
+            <input type="text" class="setting-input" id="customGreeting" placeholder="留空则使用默认（按时间段自动切换）" />
+          </div>
+        </div>
+
+        <!-- 页面标题 -->
+        <div class="setting-group">
+          <label class="setting-label">页面标题 / PAGE TITLE</label>
+          <div class="setting-row">
+            <input type="text" class="setting-input" id="pageTitle" placeholder="Cyber Homepage" />
+          </div>
+        </div>
+
+        <!-- 搜索框占位符 -->
+        <div class="setting-group">
+          <label class="setting-label">搜索框提示文字 / SEARCH PLACEHOLDER</label>
+          <div class="setting-row">
+            <input type="text" class="setting-input" id="searchPlaceholder" placeholder="Search the cosmos..." />
+          </div>
+        </div>
+
+        <!-- 粒子数量 -->
+        <div class="setting-group">
+          <label class="setting-label">粒子密度 / PARTICLE DENSITY</label>
+          <div class="setting-row">
+            <input type="range" class="setting-range" id="particleDensity" min="20" max="100" value="100" />
+            <span class="range-value" id="particleDensityVal">100%</span>
+          </div>
+        </div>
+
+        <!-- 自定义链接管理 -->
+        <div class="setting-group">
+          <label class="setting-label">快捷链接管理 / QUICK LINKS</label>
+          <div class="links-editor" id="linksEditor">
+            <div class="link-edit-list" id="linkEditList"></div>
+            <div class="link-edit-add">
+              <input type="text" class="setting-input" id="newLinkName" placeholder="名称" />
+              <input type="text" class="setting-input" id="newLinkUrl" placeholder="URL (https://...)" />
+              <input type="text" class="setting-input" id="newLinkIcon" placeholder="图标符号 (可选)" style="max-width:80px" />
+              <button class="link-add-btn" id="addLinkBtn">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-footer">
+        <button class="settings-btn reset-btn" id="resetSettings">RESET ALL</button>
+        <button class="settings-btn save-btn" id="saveSettings">SAVE & APPLY</button>
+      </div>
+    </div>
   </div>
 
   <!-- Bottom Data Stream -->
