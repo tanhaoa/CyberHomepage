@@ -6,6 +6,171 @@
   'use strict';
 
   /* ==========================================
+     i18n System
+     ========================================== */
+
+  const i18n = {
+    zh: {
+      locating: '定位中...',
+      systemOnline: '系统在线',
+      settings: '设置',
+      focusMode: '专注模式',
+      searchPlaceholder: '搜索浩瀚宇宙...',
+      quickAccess: '快捷访问',
+      systemTerminal: '系统终端',
+      dailyQuote: '每日电波',
+      quickNotes: '快捷便签',
+      save: '保存',
+      focusHint: '按 <kbd>Esc</kbd> 退出',
+      // Settings
+      settingsTitle: '系统设置',
+      labelLang: '语言',
+      labelAccent: '主题色',
+      labelParticle: '粒子颜色',
+      labelClock: '时钟格式',
+      labelEngine: '默认搜索引擎',
+      labelGreeting: '自定义问候语',
+      labelTitle: '页面标题',
+      labelSearchPh: '搜索框提示文字',
+      labelDensity: '粒子密度',
+      labelLinks: '快捷链接管理',
+      phGreeting: '留空则按时间段自动切换',
+      phSearchSetting: '搜索浩瀚宇宙...',
+      phLinkName: '名称',
+      phLinkIcon: '图标(可选)',
+      resetAll: '重置全部',
+      saveApply: '保存并应用',
+      // Terminal
+      termInit: '初始化系统...',
+      termFetch: '获取系统信息',
+      termPlatform: '平台',
+      termScreen: '屏幕',
+      termLanguage: '语言',
+      termMemory: '内存',
+      termCores: '核心',
+      termNetwork: '网络',
+      termStatus: '状态报告',
+      termOk: '所有系统正常运行',
+      // Greeting
+      goodMorning: '早上好',
+      goodAfternoon: '下午好',
+      goodEvening: '晚上好',
+      goodNight: '夜深了',
+      // Notes
+      notePlaceholder: '记录你的想法...',
+      // Stream
+      streamItems: [
+        '系统::心跳正常', '网络::延迟 12ms', 'CPU::运行正常', '内存::稳定',
+        '磁盘::健康', '安全::防火墙已启用', '日志::无告警', '同步::已完成',
+        '缓存::已清理', 'DNS::解析成功', 'TLS::1.3 已启用', '数据库::连接池正常',
+        '接口::响应 200', '集群::所有节点在线', '队列::消费速率正常',
+        '监控::在线率 99.97%', '备份::上次运行 06:00', '证书::有效期 284 天',
+        'CDN::边缘节点已同步', '认证::令牌已刷新'
+      ],
+      // Reset confirm
+      resetConfirm: '确认重置所有设置？这将清除你的自定义主题、链接等配置。',
+      // Weekdays
+      weekDays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+      // N/A
+      na: 'N/A',
+      connected: '已连接'
+    },
+    en: {
+      locating: 'LOCATING...',
+      systemOnline: 'SYSTEM ONLINE',
+      settings: 'Settings',
+      focusMode: 'Focus Mode',
+      searchPlaceholder: 'Search the cosmos...',
+      quickAccess: 'QUICK ACCESS',
+      systemTerminal: 'SYSTEM TERMINAL',
+      dailyQuote: 'DAILY TRANSMISSION',
+      quickNotes: 'QUICK NOTES',
+      save: 'SAVE',
+      focusHint: 'Press <kbd>Esc</kbd> to exit',
+      settingsTitle: 'SYSTEM SETTINGS',
+      labelLang: 'LANGUAGE',
+      labelAccent: 'ACCENT COLOR',
+      labelParticle: 'PARTICLE COLOR',
+      labelClock: 'CLOCK FORMAT',
+      labelEngine: 'DEFAULT ENGINE',
+      labelGreeting: 'CUSTOM GREETING',
+      labelTitle: 'PAGE TITLE',
+      labelSearchPh: 'SEARCH PLACEHOLDER',
+      labelDensity: 'PARTICLE DENSITY',
+      labelLinks: 'QUICK LINKS',
+      phGreeting: 'Leave empty for auto time-based greeting',
+      phSearchSetting: 'Search the cosmos...',
+      phLinkName: 'Name',
+      phLinkIcon: 'Icon(opt)',
+      resetAll: 'RESET ALL',
+      saveApply: 'SAVE & APPLY',
+      termInit: 'Initializing...',
+      termFetch: 'Fetching system info',
+      termPlatform: 'Platform',
+      termScreen: 'Screen',
+      termLanguage: 'Language',
+      termMemory: 'Memory',
+      termCores: 'Cores',
+      termNetwork: 'Network',
+      termStatus: 'Status report',
+      termOk: 'ALL SYSTEMS NOMINAL',
+      goodMorning: 'GOOD MORNING',
+      goodAfternoon: 'GOOD AFTERNOON',
+      goodEvening: 'GOOD EVENING',
+      goodNight: 'GOOD NIGHT',
+      notePlaceholder: 'Record your transmission...',
+      streamItems: [
+        'SYS::HEARTBEAT OK', 'NET::LATENCY 12ms', 'CPU::NOMINAL', 'MEM::STABLE',
+        'DISK::HEALTHY', 'SEC::FIREWALL ACTIVE', 'LOG::NO ALERTS', 'SYNC::COMPLETED',
+        'CACHE::CLEARED', 'DNS::RESOLVED', 'TLS::1.3 ACTIVE', 'DB::CONN POOL OK',
+        'API::RESPONSE 200', 'CLUSTER::ALL NODES UP', 'QUEUE::DRAIN RATE OK',
+        'MONITOR::UPTIME 99.97%', 'BACKUP::LAST RUN 06:00', 'CERT::VALID 284 DAYS',
+        'CDN::EDGE SYNC OK', 'AUTH::TOKEN REFRESHED'
+      ],
+      resetConfirm: 'Reset all settings? This will clear your custom theme, links, etc.',
+      weekDays: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+      na: 'N/A',
+      connected: 'Connected'
+    }
+  };
+
+  // Detect browser language, default zh
+  function detectLang() {
+    const saved = localStorage.getItem('cyber_lang');
+    if (saved === 'zh' || saved === 'en') return saved;
+    const nav = navigator.language || navigator.userLanguage || '';
+    return nav.toLowerCase().startsWith('zh') ? 'zh' : 'zh'; // default zh
+  }
+
+  let lang = detectLang();
+
+  function t(key) {
+    return (i18n[lang] && i18n[lang][key]) || (i18n.en[key]) || key;
+  }
+
+  function applyI18n() {
+    // Text content
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.textContent = t(el.dataset.i18n);
+    });
+    // HTML content
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      el.innerHTML = t(el.dataset.i18nHtml);
+    });
+    // Placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      el.placeholder = t(el.dataset.i18nPlaceholder);
+    });
+    // Title attributes
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      el.title = t(el.dataset.i18nTitle);
+      el.setAttribute('aria-label', t(el.dataset.i18nTitle));
+    });
+    // html lang attr
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  }
+
+  /* ==========================================
      Settings System (localStorage)
      ========================================== */
 
@@ -42,7 +207,7 @@
     } catch { return { ...DEFAULT_SETTINGS }; }
   }
 
-  function saveSettings(settings) {
+  function saveSettingsToStorage(settings) {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   }
 
@@ -57,9 +222,7 @@
     localStorage.setItem(LINKS_KEY, JSON.stringify(links));
   }
 
-  // Current settings state
   let settings = loadSettings();
-  let customLinks = loadCustomLinks();
 
   /* ==========================================
      Apply Settings
@@ -80,40 +243,26 @@
     root.style.setProperty('--cyan-glow', `rgba(${rgb}, 0.4)`);
     root.style.setProperty('--border-color', `rgba(${rgb}, 0.12)`);
     root.style.setProperty('--border-glow', `rgba(${rgb}, 0.3)`);
-    // Update grid pulse color
     document.querySelector('.grid-pulse').style.backgroundImage =
       `linear-gradient(rgba(${rgb}, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(${rgb}, 0.03) 1px, transparent 1px)`;
   }
 
   function applyAllSettings() {
-    // Accent color
     applyAccentColor(settings.accentColor);
-
-    // Page title
-    if (settings.pageTitle) {
-      document.title = settings.pageTitle;
-    }
-
-    // Search placeholder
+    if (settings.pageTitle) document.title = settings.pageTitle;
     if (settings.searchPlaceholder) {
       document.getElementById('searchInput').placeholder = settings.searchPlaceholder;
+    } else {
+      document.getElementById('searchInput').placeholder = t('searchPlaceholder');
     }
-
-    // Default search engine
     const tabs = document.querySelectorAll('.engine-tab');
-    tabs.forEach(t => {
-      t.classList.toggle('active', t.dataset.engine === settings.defaultEngine);
-    });
+    tabs.forEach(tb => tb.classList.toggle('active', tb.dataset.engine === settings.defaultEngine));
     currentEngine = settings.defaultEngine;
-
-    // Render custom links
     renderLinks();
-
-    // Particle density
-    if (typeof particleDensityMultiplier !== 'undefined') {
-      particleDensityMultiplier = settings.particleDensity / 100;
-      initParticles();
-    }
+    particleDensityMultiplier = settings.particleDensity / 100;
+    initParticles();
+    buildTerminal();
+    generateStreamContent();
   }
 
   /* ==========================================
@@ -134,9 +283,7 @@
   }
 
   class Particle {
-    constructor() {
-      this.reset();
-    }
+    constructor() { this.reset(); }
     reset() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
@@ -174,13 +321,11 @@
     const baseCount = Math.min(Math.floor((canvas.width * canvas.height) / 8000), 200);
     const count = Math.max(Math.floor(baseCount * particleDensityMultiplier), 10);
     particles = [];
-    for (let i = 0; i < count; i++) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < count; i++) particles.push(new Particle());
   }
 
   function drawLines() {
-    const lineColor = settings.particleColor;
+    const lc = settings.particleColor;
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -191,7 +336,7 @@
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(${lineColor}, ${opacity})`;
+          ctx.strokeStyle = `rgba(${lc}, ${opacity})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -207,21 +352,9 @@
     animId = requestAnimationFrame(animateParticles);
   }
 
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-    initParticles();
-  });
-
-  document.addEventListener('mousemove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-
-  document.addEventListener('mouseleave', () => {
-    mouse.x = -9999;
-    mouse.y = -9999;
-  });
-
+  window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+  document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
   resizeCanvas();
   initParticles();
   animateParticles();
@@ -235,8 +368,6 @@
   const focusClockEl = document.getElementById('focusClock');
   const focusDateEl = document.getElementById('focusDate');
   const greetingEl = document.getElementById('greeting');
-
-  const weekDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
   function updateClock() {
     const now = new Date();
@@ -257,21 +388,19 @@
     const year = now.getFullYear();
     const month = String(now.getMonth() + 1).padStart(2, '0');
     const day = String(now.getDate()).padStart(2, '0');
-    const wd = weekDays[now.getDay()];
+    const wd = t('weekDays')[now.getDay()];
     const dateStr = `${year}.${month}.${day} ${wd}`;
     dateEl.textContent = dateStr;
     focusDateEl.textContent = dateStr;
 
-    // Greeting
     if (settings.customGreeting) {
       greetingEl.textContent = settings.customGreeting;
     } else {
       const hour = now.getHours();
-      let greetText = 'GOOD NIGHT';
-      if (hour >= 5 && hour < 12) greetText = 'GOOD MORNING';
-      else if (hour >= 12 && hour < 18) greetText = 'GOOD AFTERNOON';
-      else if (hour >= 18 && hour < 23) greetText = 'GOOD EVENING';
-      greetingEl.textContent = greetText;
+      if (hour >= 5 && hour < 12) greetingEl.textContent = t('goodMorning');
+      else if (hour >= 12 && hour < 18) greetingEl.textContent = t('goodAfternoon');
+      else if (hour >= 18 && hour < 23) greetingEl.textContent = t('goodEvening');
+      else greetingEl.textContent = t('goodNight');
     }
   }
 
@@ -295,7 +424,7 @@
 
   engineTabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      engineTabs.forEach(t => t.classList.remove('active'));
+      engineTabs.forEach(tb => tb.classList.remove('active'));
       tab.classList.add('active');
       currentEngine = tab.dataset.engine;
       searchInput.focus();
@@ -305,9 +434,7 @@
   searchInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
       const query = searchInput.value.trim();
-      if (query) {
-        window.open(searchEngines[currentEngine] + encodeURIComponent(query), '_blank');
-      }
+      if (query) window.open(searchEngines[currentEngine] + encodeURIComponent(query), '_blank');
     }
   });
 
@@ -324,10 +451,11 @@
   });
 
   /* ==========================================
-     System Info
+     System Info Terminal (i18n aware)
      ========================================== */
 
-  function fillSystemInfo() {
+  function buildTerminal() {
+    const body = document.getElementById('terminalBody');
     const ua = navigator.userAgent;
     let platform = 'Unknown';
     if (ua.includes('Win')) platform = 'Windows';
@@ -336,18 +464,25 @@
     else if (ua.includes('Android')) platform = 'Android';
     else if (ua.includes('iPhone') || ua.includes('iPad')) platform = 'iOS';
 
-    document.getElementById('sysPlatform').textContent = platform;
-    document.getElementById('sysScreen').textContent = `${screen.width}×${screen.height} @${window.devicePixelRatio}x`;
-    document.getElementById('sysLang').textContent = navigator.language || 'N/A';
-    document.getElementById('sysCores').textContent = navigator.hardwareConcurrency || 'N/A';
-    document.getElementById('sysMemory').textContent = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A';
-
+    const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : t('na');
     const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    document.getElementById('sysNetwork').textContent = conn
-      ? `${conn.effectiveType || 'N/A'} / ${conn.downlink || '?'}Mbps`
-      : 'Connected';
+    const network = conn ? `${conn.effectiveType || t('na')} / ${conn.downlink || '?'}Mbps` : t('connected');
+
+    body.innerHTML = `
+      <div class="terminal-line"><span class="t-green">$</span> system_scan --init</div>
+      <div class="terminal-line t-dim">> ${t('termInit')}</div>
+      <div class="terminal-line"><span class="t-green">$</span> fetch_system_info</div>
+      <div class="terminal-line t-dim">> ${t('termPlatform')}: ${platform}</div>
+      <div class="terminal-line t-dim">> ${t('termScreen')}: ${screen.width}x${screen.height} @${window.devicePixelRatio}x</div>
+      <div class="terminal-line t-dim">> ${t('termLanguage')}: ${navigator.language || t('na')}</div>
+      <div class="terminal-line t-dim">> ${t('termMemory')}: ${memory}</div>
+      <div class="terminal-line t-dim">> ${t('termCores')}: ${navigator.hardwareConcurrency || t('na')}</div>
+      <div class="terminal-line t-dim">> ${t('termNetwork')}: ${network}</div>
+      <div class="terminal-line"><span class="t-green">$</span> status_report</div>
+      <div class="terminal-line t-cyan">> ${t('termOk')}</div>
+      <div class="terminal-line"><span class="t-green">$</span> <span class="terminal-cursor">█</span></div>
+    `;
   }
-  fillSystemInfo();
 
   /* ==========================================
      IP & Weather
@@ -360,17 +495,16 @@
       const loc = `${data.city || ''}, ${data.region || ''}, ${data.country_name || ''}`;
       document.getElementById('ipInfo').textContent = loc.trim();
     } catch {
-      document.getElementById('ipInfo').textContent = 'LOCATION: N/A';
+      document.getElementById('ipInfo').textContent = t('locating');
     }
   }
 
   async function fetchWeather() {
     try {
       const res = await fetch('https://wttr.in/?format=%t+%C', { signal: AbortSignal.timeout(5000) });
-      const text = await res.text();
-      document.getElementById('weatherInfo').textContent = text.trim();
+      document.getElementById('weatherInfo').textContent = (await res.text()).trim();
     } catch {
-      document.getElementById('weatherInfo').textContent = 'WEATHER: N/A';
+      document.getElementById('weatherInfo').textContent = '--';
     }
   }
 
@@ -406,10 +540,8 @@
     const authorEl = document.getElementById('quoteAuthor');
     textEl.innerHTML = '';
     authorEl.textContent = '';
-
     const fullText = `"${quote.text}"`;
     let i = 0;
-
     function typeChar() {
       if (i < fullText.length) {
         textEl.innerHTML = fullText.slice(0, i + 1) + '<span class="quote-cursor"></span>';
@@ -420,10 +552,8 @@
         authorEl.textContent = `— ${quote.author}`;
       }
     }
-
     setTimeout(typeChar, 800);
   }
-
   typeQuote();
 
   /* ==========================================
@@ -458,7 +588,6 @@
       `;
       notesList.appendChild(div);
     });
-
     notesList.querySelectorAll('.note-delete').forEach(btn => {
       btn.addEventListener('click', () => {
         const idx = parseInt(btn.dataset.idx, 10);
@@ -489,24 +618,20 @@
   });
 
   noteInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault();
-      noteSaveBtn.click();
-    }
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); noteSaveBtn.click(); }
   });
 
   renderNotes();
 
   /* ==========================================
-     Quick Links (dynamic rendering)
+     Quick Links
      ========================================== */
 
   const linksGrid = document.getElementById('linksGrid');
 
   function renderLinks() {
     linksGrid.innerHTML = '';
-    const links = loadCustomLinks();
-    links.forEach(link => {
+    loadCustomLinks().forEach(link => {
       const a = document.createElement('a');
       a.href = link.url;
       a.target = '_blank';
@@ -541,35 +666,21 @@
   focusToggle.addEventListener('click', toggleFocusMode);
 
   /* ==========================================
-     Data Stream
+     Data Stream (i18n aware)
      ========================================== */
 
   function generateStreamContent() {
-    const items = [
-      'SYS::HEARTBEAT OK', 'NET::LATENCY 12ms', 'CPU::NOMINAL', 'MEM::STABLE',
-      'DISK::HEALTHY', 'SEC::FIREWALL ACTIVE', 'LOG::NO ALERTS', 'SYNC::COMPLETED',
-      'CACHE::CLEARED', 'DNS::RESOLVED', 'TLS::1.3 ACTIVE', 'DB::CONN POOL OK',
-      'API::RESPONSE 200', 'CLUSTER::ALL NODES UP', 'QUEUE::DRAIN RATE OK',
-      'MONITOR::UPTIME 99.97%', 'BACKUP::LAST RUN 06:00', 'CERT::VALID 284 DAYS',
-      'CDN::EDGE SYNC OK', 'AUTH::TOKEN REFRESHED'
-    ];
-
+    const items = t('streamItems');
     const now = new Date();
     const ts = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-
     let html = '';
     for (let rep = 0; rep < 2; rep++) {
-      items.forEach(item => {
-        html += `<span class="stream-item">[${ts}] ${item}</span>`;
-      });
+      items.forEach(item => { html += `<span class="stream-item">[${ts}] ${item}</span>`; });
     }
-    return html;
+    document.getElementById('streamContent').innerHTML = html;
   }
 
-  document.getElementById('streamContent').innerHTML = generateStreamContent();
-  setInterval(() => {
-    document.getElementById('streamContent').innerHTML = generateStreamContent();
-  }, 60000);
+  setInterval(generateStreamContent, 60000);
 
   /* ==========================================
      Settings Modal
@@ -577,7 +688,7 @@
 
   let settingsOpen = false;
   const settingsBackdrop = document.getElementById('settingsBackdrop');
-  const settingsToggle = document.getElementById('settingsToggle');
+  const settingsToggleBtn = document.getElementById('settingsToggle');
   const settingsClose = document.getElementById('settingsClose');
   const saveSettingsBtn = document.getElementById('saveSettings');
   const resetSettingsBtn = document.getElementById('resetSettings');
@@ -593,16 +704,38 @@
     settingsBackdrop.classList.remove('active');
   }
 
-  settingsToggle.addEventListener('click', openSettings);
+  settingsToggleBtn.addEventListener('click', openSettings);
   settingsClose.addEventListener('click', closeSettings);
-  settingsBackdrop.addEventListener('click', e => {
-    if (e.target === settingsBackdrop) closeSettings();
-  });
+  settingsBackdrop.addEventListener('click', e => { if (e.target === settingsBackdrop) closeSettings(); });
 
-  /* --- Populate settings UI from stored values --- */
+  /* --- Language toggle in settings --- */
+
+  document.querySelectorAll('#langToggle .toggle-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('#langToggle .toggle-option').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      // Live preview language
+      lang = opt.dataset.value;
+      localStorage.setItem('cyber_lang', lang);
+      applyI18n();
+      buildTerminal();
+      generateStreamContent();
+      updateClock();
+      noteSaveBtn.textContent = t('save');
+      noteInput.placeholder = t('notePlaceholder');
+      if (!settings.searchPlaceholder) {
+        searchInput.placeholder = t('searchPlaceholder');
+      }
+    });
+  });
 
   function populateSettingsUI() {
     const s = loadSettings();
+
+    // Language
+    document.querySelectorAll('#langToggle .toggle-option').forEach(opt => {
+      opt.classList.toggle('active', opt.dataset.value === lang);
+    });
 
     // Accent color
     document.getElementById('accentPicker').value = s.accentColor;
@@ -620,24 +753,17 @@
       opt.classList.toggle('active', opt.dataset.value === s.clockFormat);
     });
 
-    // Default engine
     document.getElementById('defaultEngine').value = s.defaultEngine;
-
-    // Text inputs
     document.getElementById('customGreeting').value = s.customGreeting || '';
     document.getElementById('pageTitle').value = s.pageTitle || '';
     document.getElementById('searchPlaceholder').value = s.searchPlaceholder || '';
-
-    // Particle density
     document.getElementById('particleDensity').value = s.particleDensity;
     document.getElementById('particleDensityVal').textContent = s.particleDensity + '%';
 
-    // Links editor
     renderLinksEditor();
   }
 
-  /* --- Accent color preset clicks --- */
-
+  /* --- Accent color --- */
   document.querySelectorAll('#accentPresets .color-preset').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#accentPresets .color-preset').forEach(b => b.classList.remove('active'));
@@ -645,13 +771,11 @@
       document.getElementById('accentPicker').value = btn.dataset.color;
     });
   });
-
-  document.getElementById('accentPicker').addEventListener('input', e => {
+  document.getElementById('accentPicker').addEventListener('input', () => {
     document.querySelectorAll('#accentPresets .color-preset').forEach(b => b.classList.remove('active'));
   });
 
-  /* --- Particle color preset clicks --- */
-
+  /* --- Particle color --- */
   document.querySelectorAll('#particlePresets .color-preset').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#particlePresets .color-preset').forEach(b => b.classList.remove('active'));
@@ -659,8 +783,7 @@
     });
   });
 
-  /* --- Clock format toggle --- */
-
+  /* --- Clock format --- */
   document.querySelectorAll('#clockFormatToggle .toggle-option').forEach(opt => {
     opt.addEventListener('click', () => {
       document.querySelectorAll('#clockFormatToggle .toggle-option').forEach(o => o.classList.remove('active'));
@@ -669,13 +792,11 @@
   });
 
   /* --- Density slider --- */
-
   document.getElementById('particleDensity').addEventListener('input', e => {
     document.getElementById('particleDensityVal').textContent = e.target.value + '%';
   });
 
   /* --- Links editor --- */
-
   function renderLinksEditor() {
     const list = document.getElementById('linkEditList');
     const links = loadCustomLinks();
@@ -687,11 +808,10 @@
         <span class="le-icon">${escapeHtml(link.icon || '●')}</span>
         <span class="le-name">${escapeHtml(link.name)}</span>
         <span class="le-url">${escapeHtml(link.url)}</span>
-        <button class="le-del" data-idx="${idx}" title="删除">✕</button>
+        <button class="le-del" data-idx="${idx}" title="Delete">✕</button>
       `;
       list.appendChild(div);
     });
-
     list.querySelectorAll('.le-del').forEach(btn => {
       btn.addEventListener('click', () => {
         const idx = parseInt(btn.dataset.idx, 10);
@@ -707,25 +827,18 @@
     const name = document.getElementById('newLinkName').value.trim();
     let url = document.getElementById('newLinkUrl').value.trim();
     const icon = document.getElementById('newLinkIcon').value.trim() || '●';
-
     if (!name || !url) return;
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = 'https://' + url;
-    }
-
+    if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'https://' + url;
     const links = loadCustomLinks();
     links.push({ name, url, icon, color: '#00e5ff' });
     saveCustomLinks(links);
-
     document.getElementById('newLinkName').value = '';
     document.getElementById('newLinkUrl').value = '';
     document.getElementById('newLinkIcon').value = '';
-
     renderLinksEditor();
   });
 
-  /* --- Save settings --- */
-
+  /* --- Save --- */
   saveSettingsBtn.addEventListener('click', () => {
     const activeAccent = document.querySelector('#accentPresets .color-preset.active');
     const activeParticle = document.querySelector('#particlePresets .color-preset.active');
@@ -740,27 +853,29 @@
     settings.searchPlaceholder = document.getElementById('searchPlaceholder').value.trim();
     settings.particleDensity = parseInt(document.getElementById('particleDensity').value, 10);
 
-    saveSettings(settings);
+    saveSettingsToStorage(settings);
     applyAllSettings();
     closeSettings();
   });
 
-  /* --- Reset settings --- */
-
+  /* --- Reset --- */
   resetSettingsBtn.addEventListener('click', () => {
-    if (!confirm('确认重置所有设置？这将清除你的自定义主题、链接等配置。')) return;
+    if (!confirm(t('resetConfirm'))) return;
     localStorage.removeItem(SETTINGS_KEY);
     localStorage.removeItem(LINKS_KEY);
+    localStorage.removeItem('cyber_lang');
+    lang = 'zh';
     settings = { ...DEFAULT_SETTINGS };
-    customLinks = [...DEFAULT_LINKS];
+    applyI18n();
     applyAllSettings();
     populateSettingsUI();
   });
 
   /* ==========================================
-     Initial Apply
+     Boot
      ========================================== */
 
+  applyI18n();
   applyAllSettings();
 
 })();

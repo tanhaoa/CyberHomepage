@@ -12,27 +12,24 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Canvas Particle Background -->
   <canvas id="particle-canvas"></canvas>
-
-  <!-- Grid Pulse Overlay -->
   <div class="grid-pulse"></div>
 
   <!-- Top Bar -->
   <header class="top-bar" id="topBar">
     <div class="top-bar-left">
       <span class="status-dot online"></span>
-      <span class="terminal-text" id="ipInfo">LOCATING...</span>
+      <span class="terminal-text" id="ipInfo" data-i18n="locating">LOCATING...</span>
     </div>
     <div class="top-bar-center">
-      <span class="terminal-text">SYSTEM ONLINE</span>
+      <span class="terminal-text" data-i18n="systemOnline">SYSTEM ONLINE</span>
     </div>
     <div class="top-bar-right">
-      <span class="terminal-text" id="weatherInfo">LOADING...</span>
-      <button class="top-btn" id="settingsToggle" title="设置" aria-label="打开设置">
+      <span class="terminal-text" id="weatherInfo" data-i18n="loading">LOADING...</span>
+      <button class="top-btn" id="settingsToggle" title="" aria-label="" data-i18n-title="settings">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
-      <button class="top-btn focus-toggle" id="focusToggle" title="专注模式" aria-label="切换专注模式">
+      <button class="top-btn focus-toggle" id="focusToggle" title="" aria-label="" data-i18n-title="focusMode">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
       </button>
     </div>
@@ -40,7 +37,6 @@
 
   <!-- Main Content -->
   <main class="main-content" id="mainContent">
-    <!-- Clock Section -->
     <section class="clock-section">
       <div class="greeting" id="greeting"></div>
       <div class="clock-wrapper">
@@ -50,7 +46,6 @@
       <div class="date-display" id="dateDisplay"></div>
     </section>
 
-    <!-- Search Bar -->
     <section class="search-section">
       <div class="search-container">
         <div class="search-engine-tabs">
@@ -61,84 +56,37 @@
         </div>
         <div class="search-bar">
           <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="searchInput" placeholder="Search the cosmos..." autocomplete="off" />
+          <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="" autocomplete="off" />
           <kbd class="search-hint">/</kbd>
         </div>
       </div>
     </section>
 
-    <!-- Card Grid -->
     <section class="card-grid">
       <!-- Quick Links -->
       <div class="glass-card quick-links-card">
         <div class="card-header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          <span>QUICK ACCESS</span>
+          <span data-i18n="quickAccess">QUICK ACCESS</span>
         </div>
-        <div class="links-grid" id="linksGrid">
-          <a href="https://github.com" target="_blank" rel="noopener" class="link-item" data-color="#f97316">
-            <div class="link-icon">⌥</div>
-            <span>GitHub</span>
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener" class="link-item" data-color="#ef4444">
-            <div class="link-icon">▶</div>
-            <span>YouTube</span>
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener" class="link-item" data-color="#3b82f6">
-            <div class="link-icon">✦</div>
-            <span>Twitter</span>
-          </a>
-          <a href="https://chat.openai.com" target="_blank" rel="noopener" class="link-item" data-color="#10b981">
-            <div class="link-icon">◈</div>
-            <span>ChatGPT</span>
-          </a>
-          <a href="https://stackoverflow.com" target="_blank" rel="noopener" class="link-item" data-color="#f59e0b">
-            <div class="link-icon">⧫</div>
-            <span>StackOverflow</span>
-          </a>
-          <a href="https://reddit.com" target="_blank" rel="noopener" class="link-item" data-color="#ff6b35">
-            <div class="link-icon">◉</div>
-            <span>Reddit</span>
-          </a>
-          <a href="https://notion.so" target="_blank" rel="noopener" class="link-item" data-color="#a855f7">
-            <div class="link-icon">▢</div>
-            <span>Notion</span>
-          </a>
-          <a href="https://spotify.com" target="_blank" rel="noopener" class="link-item" data-color="#22c55e">
-            <div class="link-icon">♫</div>
-            <span>Spotify</span>
-          </a>
-        </div>
+        <div class="links-grid" id="linksGrid"></div>
       </div>
 
       <!-- System Info Terminal -->
       <div class="glass-card terminal-card">
         <div class="card-header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          <span>SYSTEM TERMINAL</span>
+          <span data-i18n="systemTerminal">SYSTEM TERMINAL</span>
           <span class="terminal-blink">_</span>
         </div>
-        <div class="terminal-body" id="terminalBody">
-          <div class="terminal-line"><span class="t-green">$</span> system_scan --init</div>
-          <div class="terminal-line t-dim">> Initializing...</div>
-          <div class="terminal-line"><span class="t-green">$</span> fetch_system_info</div>
-          <div class="terminal-line t-dim">> Platform: <span id="sysPlatform">--</span></div>
-          <div class="terminal-line t-dim">> Screen: <span id="sysScreen">--</span></div>
-          <div class="terminal-line t-dim">> Language: <span id="sysLang">--</span></div>
-          <div class="terminal-line t-dim">> Memory: <span id="sysMemory">--</span></div>
-          <div class="terminal-line t-dim">> Cores: <span id="sysCores">--</span></div>
-          <div class="terminal-line t-dim">> Network: <span id="sysNetwork">--</span></div>
-          <div class="terminal-line"><span class="t-green">$</span> status_report</div>
-          <div class="terminal-line t-cyan">> ALL SYSTEMS NOMINAL</div>
-          <div class="terminal-line"><span class="t-green">$</span> <span class="terminal-cursor">█</span></div>
-        </div>
+        <div class="terminal-body" id="terminalBody"></div>
       </div>
 
       <!-- Daily Quote -->
       <div class="glass-card quote-card">
         <div class="card-header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3z"/></svg>
-          <span>DAILY TRANSMISSION</span>
+          <span data-i18n="dailyQuote">DAILY TRANSMISSION</span>
         </div>
         <div class="quote-body">
           <blockquote class="quote-text" id="quoteText"></blockquote>
@@ -150,23 +98,23 @@
       <div class="glass-card notes-card">
         <div class="card-header">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          <span>QUICK NOTES</span>
+          <span data-i18n="quickNotes">QUICK NOTES</span>
           <span class="note-count" id="noteCount">0</span>
         </div>
         <div class="notes-body">
-          <textarea id="noteInput" placeholder="Record your transmission..." rows="3"></textarea>
-          <button class="note-save-btn" id="noteSaveBtn">SAVE</button>
+          <textarea id="noteInput" data-i18n-placeholder="notePlaceholder" placeholder="" rows="3"></textarea>
+          <button class="note-save-btn" id="noteSaveBtn" data-i18n="save">SAVE</button>
           <div class="notes-list" id="notesList"></div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Focus Mode Overlay (pure clock + particles) -->
+  <!-- Focus Mode -->
   <div class="focus-overlay" id="focusOverlay">
     <div class="focus-clock" id="focusClock">00:00</div>
     <div class="focus-date" id="focusDate"></div>
-    <div class="focus-hint">Press <kbd>Esc</kbd> to exit</div>
+    <div class="focus-hint" data-i18n-html="focusHint">Press <kbd>Esc</kbd> to exit</div>
   </div>
 
   <!-- Settings Modal -->
@@ -174,44 +122,55 @@
     <div class="settings-modal" id="settingsModal">
       <div class="settings-header">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        <span>SYSTEM SETTINGS</span>
+        <span data-i18n="settingsTitle">SYSTEM SETTINGS</span>
         <button class="settings-close" id="settingsClose">&times;</button>
       </div>
 
       <div class="settings-body">
+        <!-- 语言 -->
+        <div class="setting-group">
+          <label class="setting-label" data-i18n="labelLang">语言 / LANGUAGE</label>
+          <div class="setting-row">
+            <button class="toggle-group" id="langToggle">
+              <span class="toggle-option active" data-value="zh">中文</span>
+              <span class="toggle-option" data-value="en">English</span>
+            </button>
+          </div>
+        </div>
+
         <!-- 主题色 -->
         <div class="setting-group">
-          <label class="setting-label">主题色 / ACCENT COLOR</label>
+          <label class="setting-label" data-i18n="labelAccent">主题色 / ACCENT COLOR</label>
           <div class="setting-row">
             <div class="color-presets" id="accentPresets">
-              <button class="color-preset active" data-color="#00e5ff" style="background:#00e5ff" title="青色"></button>
-              <button class="color-preset" data-color="#a855f7" style="background:#a855f7" title="紫色"></button>
-              <button class="color-preset" data-color="#f97316" style="background:#f97316" title="橙色"></button>
-              <button class="color-preset" data-color="#10b981" style="background:#10b981" title="绿色"></button>
-              <button class="color-preset" data-color="#f43f5e" style="background:#f43f5e" title="玫红"></button>
-              <button class="color-preset" data-color="#eab308" style="background:#eab308" title="金色"></button>
+              <button class="color-preset active" data-color="#00e5ff" style="background:#00e5ff"></button>
+              <button class="color-preset" data-color="#a855f7" style="background:#a855f7"></button>
+              <button class="color-preset" data-color="#f97316" style="background:#f97316"></button>
+              <button class="color-preset" data-color="#10b981" style="background:#10b981"></button>
+              <button class="color-preset" data-color="#f43f5e" style="background:#f43f5e"></button>
+              <button class="color-preset" data-color="#eab308" style="background:#eab308"></button>
             </div>
-            <input type="color" class="color-picker" id="accentPicker" value="#00e5ff" title="自定义颜色" />
+            <input type="color" class="color-picker" id="accentPicker" value="#00e5ff" />
           </div>
         </div>
 
         <!-- 粒子颜色 -->
         <div class="setting-group">
-          <label class="setting-label">粒子颜色 / PARTICLE COLOR</label>
+          <label class="setting-label" data-i18n="labelParticle">粒子颜色 / PARTICLE COLOR</label>
           <div class="setting-row">
             <div class="color-presets" id="particlePresets">
-              <button class="color-preset active" data-color="0,229,255" style="background:#00e5ff" title="青色"></button>
-              <button class="color-preset" data-color="139,92,246" style="background:#8b5cf6" title="紫色"></button>
-              <button class="color-preset" data-color="16,185,129" style="background:#10b981" title="绿色"></button>
-              <button class="color-preset" data-color="249,115,22" style="background:#f97316" title="橙色"></button>
-              <button class="color-preset" data-color="255,255,255" style="background:#ffffff" title="白色"></button>
+              <button class="color-preset active" data-color="0,229,255" style="background:#00e5ff"></button>
+              <button class="color-preset" data-color="139,92,246" style="background:#8b5cf6"></button>
+              <button class="color-preset" data-color="16,185,129" style="background:#10b981"></button>
+              <button class="color-preset" data-color="249,115,22" style="background:#f97316"></button>
+              <button class="color-preset" data-color="255,255,255" style="background:#ffffff"></button>
             </div>
           </div>
         </div>
 
         <!-- 时钟格式 -->
         <div class="setting-group">
-          <label class="setting-label">时钟格式 / CLOCK FORMAT</label>
+          <label class="setting-label" data-i18n="labelClock">时钟格式 / CLOCK FORMAT</label>
           <div class="setting-row">
             <button class="toggle-group" id="clockFormatToggle">
               <span class="toggle-option active" data-value="24">24H</span>
@@ -222,7 +181,7 @@
 
         <!-- 默认搜索引擎 -->
         <div class="setting-group">
-          <label class="setting-label">默认搜索引擎 / DEFAULT ENGINE</label>
+          <label class="setting-label" data-i18n="labelEngine">默认搜索引擎 / DEFAULT ENGINE</label>
           <div class="setting-row">
             <select class="setting-select" id="defaultEngine">
               <option value="google">Google</option>
@@ -235,15 +194,15 @@
 
         <!-- 问候语 -->
         <div class="setting-group">
-          <label class="setting-label">自定义问候语 / CUSTOM GREETING</label>
+          <label class="setting-label" data-i18n="labelGreeting">自定义问候语 / CUSTOM GREETING</label>
           <div class="setting-row">
-            <input type="text" class="setting-input" id="customGreeting" placeholder="留空则使用默认（按时间段自动切换）" />
+            <input type="text" class="setting-input" id="customGreeting" data-i18n-placeholder="phGreeting" placeholder="" />
           </div>
         </div>
 
         <!-- 页面标题 -->
         <div class="setting-group">
-          <label class="setting-label">页面标题 / PAGE TITLE</label>
+          <label class="setting-label" data-i18n="labelTitle">页面标题 / PAGE TITLE</label>
           <div class="setting-row">
             <input type="text" class="setting-input" id="pageTitle" placeholder="Cyber Homepage" />
           </div>
@@ -251,30 +210,30 @@
 
         <!-- 搜索框占位符 -->
         <div class="setting-group">
-          <label class="setting-label">搜索框提示文字 / SEARCH PLACEHOLDER</label>
+          <label class="setting-label" data-i18n="labelSearchPh">搜索框提示 / SEARCH PLACEHOLDER</label>
           <div class="setting-row">
-            <input type="text" class="setting-input" id="searchPlaceholder" placeholder="Search the cosmos..." />
+            <input type="text" class="setting-input" id="searchPlaceholder" data-i18n-placeholder="phSearchSetting" placeholder="" />
           </div>
         </div>
 
-        <!-- 粒子数量 -->
+        <!-- 粒子密度 -->
         <div class="setting-group">
-          <label class="setting-label">粒子密度 / PARTICLE DENSITY</label>
+          <label class="setting-label" data-i18n="labelDensity">粒子密度 / PARTICLE DENSITY</label>
           <div class="setting-row">
             <input type="range" class="setting-range" id="particleDensity" min="20" max="100" value="100" />
             <span class="range-value" id="particleDensityVal">100%</span>
           </div>
         </div>
 
-        <!-- 自定义链接管理 -->
+        <!-- 快捷链接管理 -->
         <div class="setting-group">
-          <label class="setting-label">快捷链接管理 / QUICK LINKS</label>
+          <label class="setting-label" data-i18n="labelLinks">快捷链接管理 / QUICK LINKS</label>
           <div class="links-editor" id="linksEditor">
             <div class="link-edit-list" id="linkEditList"></div>
             <div class="link-edit-add">
-              <input type="text" class="setting-input" id="newLinkName" placeholder="名称" />
+              <input type="text" class="setting-input" id="newLinkName" data-i18n-placeholder="phLinkName" placeholder="" />
               <input type="text" class="setting-input" id="newLinkUrl" placeholder="URL (https://...)" />
-              <input type="text" class="setting-input" id="newLinkIcon" placeholder="图标符号 (可选)" style="max-width:80px" />
+              <input type="text" class="setting-input" id="newLinkIcon" data-i18n-placeholder="phLinkIcon" placeholder="" style="max-width:80px" />
               <button class="link-add-btn" id="addLinkBtn">+</button>
             </div>
           </div>
@@ -282,8 +241,8 @@
       </div>
 
       <div class="settings-footer">
-        <button class="settings-btn reset-btn" id="resetSettings">RESET ALL</button>
-        <button class="settings-btn save-btn" id="saveSettings">SAVE & APPLY</button>
+        <button class="settings-btn reset-btn" id="resetSettings" data-i18n="resetAll">RESET ALL</button>
+        <button class="settings-btn save-btn" id="saveSettings" data-i18n="saveApply">SAVE & APPLY</button>
       </div>
     </div>
   </div>
